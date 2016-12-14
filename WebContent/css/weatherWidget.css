@@ -1,0 +1,28 @@
+#weather-temp {
+	font-size: 2em;
+	text-align: right;
+	float: left;
+	
+}
+
+#weather-condition {
+	text-align: right;
+}
+
+#weather-icon {
+	font-size: 3.5em;
+	float: right;
+	text-align: left;
+}
+
+#weather-widget {
+	font-size: 4vw;
+	width: 10em;
+	width: 45%;
+	float: right;
+}
+
+#weather-widget div {
+	margin: 0px;
+	width: 48%;
+}

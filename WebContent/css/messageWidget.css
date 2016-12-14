@@ -1,0 +1,10 @@
+#message-widget {
+	float: none;
+	clear: both;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+	top: 50vh;
+	position: absolute;
+}
