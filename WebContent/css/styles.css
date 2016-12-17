@@ -1,7 +1,3 @@
-@import "clockWidget.css";
-@import "weatherWidget.css";
-@import "messageWidget.css";
-
 body {
 	color: #ffffff;
 	background-color: #000000;

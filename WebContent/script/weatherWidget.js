@@ -1,10 +1,12 @@
-
+/*
+ * Widget that displays weather information pulled from Yahoo! Weather. Updates every minute.
+ */
 
 var url="https://query.yahooapis.com/v1/public/yql?q=";
 var scriptId = "weatherScript";
 var weatherData;
 var night = false;
-	
+
 function updateWeather(data) {
 	weatherData = data;
 	var location = data.query.results.channel.location;
@@ -23,14 +25,37 @@ function updateWeather(data) {
 function fetchWeather(woeId) {
 	var query = "select%20*%20from%20weather.forecast%20where%20woeid%20%3D%20" + woeId + "%20and%20u='c'&format=json";
 	var src =  url +query+"&callback=updateWeather";
-	var tag = document.createElement("script");
+	var script = document.createElement("script");
 	
-	tag.id = scriptId;
-	tag.src = src;
-	document.body.appendChild(tag);
+	script.id = scriptId;
+	script.src = src;
+	
+	document.body.appendChild(script);
 }
 
 function initWeatherWidget(woeId) {
+	var parent = document.createElement("div");
+	var icon = document.createElement("div");
+	var temp = document.createElement("div");
+	var condition = document.createElement("div");
+	var style = document.createElement("link");
+	
+	parent.id = "weather-widget";
+	temp.id = "weather-temp";
+	icon.id = "weather-icon";
+	condition.id = "weather-condition";
+	
+	style.rel = "stylesheet";
+	style.type = "text/css";
+	style.href = "css/weatherWidget.css";
+	
+	parent.append(icon);
+	parent.append(temp);
+	parent.append(condition);
+	
+	document.head.append(style);
+	document.body.append(parent);
+	
 	setInterval(fetchWeather(woeId),60000);
 }
 
