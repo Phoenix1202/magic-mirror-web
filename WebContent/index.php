@@ -8,13 +8,14 @@
 <script type="text/javascript" src="./script/weatherWidget.js"></script>
 <script type="text/javascript" src="./script/clockWidget.js"></script>
 <script type="text/javascript" src="./script/messageWidget.js"></script>	
+<script type="text/javascript" src="./script/temperatureWidget.js"></script>
 </head>
 <body>
 	<script>
 		initClockWidget();
 		initWeatherWidget("545299");
+		initTemperatureWidget("28-000008597ee4");
 		initMessageWidget("Why, hello there!");
-		
 		setTimeout(function() {
 			var h = new Date().getHours();
 			

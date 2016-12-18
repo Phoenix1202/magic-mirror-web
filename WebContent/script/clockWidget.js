@@ -15,6 +15,7 @@ function initClockWidget() {
 	var style = document.createElement("link");
 	
 	div.id = "clock-widget";
+	div.className ="widget";
 	
 	style.rel = "stylesheet";
 	style.type = "text/css";

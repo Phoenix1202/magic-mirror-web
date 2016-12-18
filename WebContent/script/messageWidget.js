@@ -7,6 +7,7 @@ function initMessageWidget(message) {
 	var style = document.createElement("link");
 	
 	div.id = "message-widget";
+	div.className = "widget";
 	div.innerHTML = message;
 	
 	style.rel = "stylesheet";

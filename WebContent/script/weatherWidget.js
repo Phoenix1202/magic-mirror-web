@@ -41,6 +41,8 @@ function initWeatherWidget(woeId) {
 	var style = document.createElement("link");
 	
 	parent.id = "weather-widget";
+	parent.className = "widget"
+	
 	temp.id = "weather-temp";
 	icon.id = "weather-icon";
 	condition.id = "weather-condition";

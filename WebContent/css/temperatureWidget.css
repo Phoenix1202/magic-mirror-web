@@ -1,0 +1,32 @@
+#temperature-widget {
+	font-size: 4vw;
+	width: 10em;
+	width: 45%;
+	float: right;
+}
+
+#temperature-widget div{
+	width:2em;
+	margin: auto;
+	border-left: solid 0.1em white;
+	border-bottom: solid 0.1em white;
+	border-right: solid 0.1em white;
+	text-align: center;
+	height: 1em;
+	overflow: visible;
+	height: 1em;
+	margin-top: 1.5em;
+	padding-bottom: 0.2em;
+}
+
+#temperature-widget div:after {
+	content: "";
+	display: block;
+	height: 1.7em;
+	width: 1.7em;
+	border-top: solid 0.1em white;
+	border-left: solid 0.1em white;
+	transform: rotate(45deg);
+	margin-top: -2.2em;
+	margin-left: 0.105em;
+}
