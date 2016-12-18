@@ -13,8 +13,8 @@
 <body>
 	<script>
 		initClockWidget();
-		initWeatherWidget("545299", 60000);
-		initTemperatureWidget("28-000008597ee4", 1000);
+		initWeatherWidget("545299");
+		initTemperatureWidget("28-000008597ee4", 5000);
 		initMessageWidget("Why, hello there!");
 		setInterval(function() {
 			var h = new Date().getHours();

@@ -6,6 +6,7 @@ var url="https://query.yahooapis.com/v1/public/yql?q=";
 var scriptId = "weatherScript";
 var weatherData;
 var night = false;
+var youAreHere;
 
 /*
  * Callback function for query
@@ -32,29 +33,35 @@ function updateWeather(data) {
 		temp = condition.temp;
 		text = condition.text;
 	}
-	if(data != null || (data == null && oldText == "")) {
+	if(data.query.results != null || (data.query.results == null && oldText == "")) {
 		document.getElementById("weather-condition").innerHTML = text;
 		document.getElementById("weather-temp").innerHTML = temp + "°C<br>";
 		document.body.removeChild(document.getElementById(scriptId));
 		document.getElementById("weather-icon").className = getClassNameFromCode(code, sunrise, 23);
+	}
+
+	if(data.query.results != null) {
+		setTimeout(uWeather, 60000)
+	} else {
+		setTimeout(uWeather, 5000)
 	}
 };
 
 /*
  * Send weather query
  */
-var uWeather = function fetchWeather(woeId) {
-	var query = "select%20*%20from%20weather.forecast%20where%20woeid%20%3D%20" + woeId + "%20and%20u='c'&format=json";
+var uWeather = function fetchWeather() {
+	var query = "select%20*%20from%20weather.forecast%20where%20woeid%20%3D%20" + youAreHere + "%20and%20u='c'&format=json";
 	var src =  url +query+"&callback=updateWeather";
 	var script = document.createElement("script");
 	
 	script.id = scriptId;
 	script.src = src;
-	
+
 	document.getElementsByTagName('body')[0].appendChild(script);
 }
 
-function initWeatherWidget(woeId, interval) {
+function initWeatherWidget(woeId) {
 	var parent = document.createElement("div");
 	var icon = document.createElement("div");
 	var temp = document.createElement("div");
@@ -80,7 +87,9 @@ function initWeatherWidget(woeId, interval) {
 	document.getElementsByTagName('head')[0].appendChild(style);
 	document.getElementsByTagName('body')[0].appendChild(parent);
 	
-	setInterval(uWeather(woeId),interval);
+	youAreHere = woeId;
+
+	setTimeout(uWeather);
 }
 
 /* List of Yahoo Weather codes: https://developer.yahoo.com/weather/documentation.html#codes */
