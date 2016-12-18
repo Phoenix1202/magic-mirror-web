@@ -13,10 +13,10 @@
 <body>
 	<script>
 		initClockWidget();
-		initWeatherWidget("545299");
-		initTemperatureWidget("28-000008597ee4");
+		initWeatherWidget("545299", 60000);
+		initTemperatureWidget("28-000008597ee4", 1000);
 		initMessageWidget("Why, hello there!");
-		setTimeout(function() {
+		setInterval(function() {
 			var h = new Date().getHours();
 			
 			if(h > 4 && h < 11) {

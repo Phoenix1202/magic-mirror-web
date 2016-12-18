@@ -7,22 +7,43 @@ var scriptId = "weatherScript";
 var weatherData;
 var night = false;
 
+/*
+ * Callback function for query
+ */
 function updateWeather(data) {
+	var time = null;
+	var code = -1;
+	var sunrise = 0;
+	var sunset = 0;
+	var temp = "--";
+	var text = "Unavailable";
 	weatherData = data;
-	var location = data.query.results.channel.location;
-	var condition = data.query.results.channel.item.condition;
-	var time = data.query.results.channel.lastBuildDate;
-	var text = "Weather for "+  location.city + ", "+ location.country+" at " + time;
-	var code = condition.code;
-	var sunrise = parseInt(data.query.results.channel.astronomy.sunrise.split(":")[0]);
-	var sunset = parseInt(data.query.results.channel.astronomy.sunset.split(":")[0]) + 12;
-	document.getElementById("weather-condition").innerHTML = condition.text;
-	document.getElementById("weather-temp").innerHTML = condition.temp + "°C<br>";
-	document.body.removeChild(document.getElementById(scriptId));
-	document.getElementById("weather-icon").className = getClassNameFromCode(code, sunrise, 23);
+	//alert(JSON.stringify(data));
+	var oldText = document.getElementById("weather-condition").innerHTML;
+	if(data.query.results != null) {
+		var location = data.query.results.channel.location;
+		var condition = data.query.results.channel.item.condition;
+		var time = data.query.results.channel.lastBuildDate;
+		var code = condition.code;
+		time = data.query.results.channel.lastBuildDate;
+		code = condition.code;
+		sunrise = parseInt(data.query.results.channel.astronomy.sunrise.split(":")[0]);
+		sunset = parseInt(data.query.results.channel.astronomy.sunset.split(":")[0]) + 12;
+		temp = condition.temp;
+		text = condition.text;
+	}
+	if(data != null || (data == null && oldText == "")) {
+		document.getElementById("weather-condition").innerHTML = text;
+		document.getElementById("weather-temp").innerHTML = temp + "°C<br>";
+		document.body.removeChild(document.getElementById(scriptId));
+		document.getElementById("weather-icon").className = getClassNameFromCode(code, sunrise, 23);
+	}
 };
 
-function fetchWeather(woeId) {
+/*
+ * Send weather query
+ */
+var uWeather = function fetchWeather(woeId) {
 	var query = "select%20*%20from%20weather.forecast%20where%20woeid%20%3D%20" + woeId + "%20and%20u='c'&format=json";
 	var src =  url +query+"&callback=updateWeather";
 	var script = document.createElement("script");
@@ -30,10 +51,10 @@ function fetchWeather(woeId) {
 	script.id = scriptId;
 	script.src = src;
 	
-	document.body.appendChild(script);
+	document.getElementsByTagName('body')[0].appendChild(script);
 }
 
-function initWeatherWidget(woeId) {
+function initWeatherWidget(woeId, interval) {
 	var parent = document.createElement("div");
 	var icon = document.createElement("div");
 	var temp = document.createElement("div");
@@ -51,21 +72,22 @@ function initWeatherWidget(woeId) {
 	style.type = "text/css";
 	style.href = "css/weatherWidget.css";
 	
-	parent.append(icon);
-	parent.append(temp);
-	parent.append(condition);
+	parent.appendChild(icon);
+	parent.appendChild(temp);
+	parent.appendChild(condition);
 	
-	document.head.append(style);
-	document.body.append(parent);
+
+	document.getElementsByTagName('head')[0].appendChild(style);
+	document.getElementsByTagName('body')[0].appendChild(parent);
 	
-	setInterval(fetchWeather(woeId),60000);
+	setInterval(uWeather(woeId),interval);
 }
 
 /* List of Yahoo Weather codes: https://developer.yahoo.com/weather/documentation.html#codes */
 function getClassNameFromCode(code, sunrise, sunset) {
 	var name = "wi-";
-	
 	var now = new Date().getHours();
+
 	if(now <= sunrise || now > sunset) {
 		name += "night-"
 		night = true;
@@ -75,44 +97,71 @@ function getClassNameFromCode(code, sunrise, sunset) {
 	}
 	
 	switch (code) {
-	case "3","4","37","38","39","45","47":
-		name += "thunderstorm"
+	case "3":
+	case "4":
+	case "37":
+	case "38":
+	case "39":
+	case "45":
+	case "47":
+		name += "thunderstorm";
 		break;
-	case "5","6","7","8","9","10","35":
-		name += "rain-mix"
+	case "5":
+	case "6":
+	case "7":
+	case "8":
+	case "9":
+	case "10":
+	case "35":
+		name += "rain-mix";
 		break;
-	case "11","12","40":
-		name += "showers"
+	case "11":
+	case "12":
+	case "40":
+		name += "showers";
 		break;
-	case "13","14","16","41","42","46":
-		name += "snow"
+	case "13":
+	case "14":
+	case "16":
+	case "41":
+	case "42":
+	case "46":
+		name += "snow";
 		break;
 	case "15":
-		name += "snow-wind"
+		name += "snow-wind";
 		break;
 	case "18":
-		name += "sleet"
+		name += "sleet";
 		break;
-	case "20","21":
-		name += "fog"
+	case "20":
+	case "21":
+		name += "fog";
 		break;
 	case "24":
-		name += "windy"
-	break;
-	case "25","26","27","28","29","30":
-		name += "cloudy"
-	break;
+		name += "windy";
+		break;
+	case "25":
+	case "26":
+	case "27":
+	case "28":
+	case "29":
+	case "30":
+		name += "cloudy";
+		break;
 	case "31":
-		name = "wi-night-clear"
-	break;
-	case "32","33","34":
-		name = "wi-day-sunny"
-	break;
+		name = "wi-night-clear";
+		break;
+	case "32":
+	case "33":
+	case "34":
+		name = "wi-day-sunny";
+		break;
 	case "36":
-		name = "wi-hot"
-	break;
+		name = "wi-hot";
+		break;
 	default:
-		name += "na"
+		name = "wi-na";
 		break;
 	}
 	return "wi " + name;

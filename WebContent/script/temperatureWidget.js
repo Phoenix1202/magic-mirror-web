@@ -6,7 +6,16 @@ var base_dir = "/sys/bus/w1/devices/";
 var sensor_id = null;
 var inner = null;
 
-function initTemperatureWidget(sensor_id) {
+var uTemp = function updateTemperature() {
+	var client = new XMLHttpRequest();
+	client.open('GET', 'script/temperatureReader.php?addr='+sensor_id);
+	client.onreadystatechange = function() {
+	  inner.innerHTML = client.responseText+"°";
+	}
+	client.send();
+}
+
+function initTemperatureWidget(sensor_id, interval) {
 	this.sensor_id = sensor_id;
 	var div = document.createElement("div");
 	var style = document.createElement("link");
@@ -14,23 +23,14 @@ function initTemperatureWidget(sensor_id) {
 
 	div.id = "temperature-widget";
 	div.className = "widget";
-	div.append(inner);
+	div.appendChild(inner);
 
 	style.rel = "stylesheet";
 	style.type = "text/css";
 	style.href = "css/temperatureWidget.css";
-	
-	document.head.append(style);
-	document.body.append(div);
 
-	setInterval(updateTemp(), 5000)
-}
+	document.getElementsByTagName('head')[0].appendChild(style);
+	document.getElementsByTagName('body')[0].appendChild(div);
 
-function updateTemp() {
-	var client = new XMLHttpRequest();
-	client.open('GET', 'script/temperatureReader.php?addr='+sensor_id);
-	client.onreadystatechange = function() {
-	  inner.innerHTML = client.responseText+"°";
-	}
-	client.send();
+	setInterval(uTemp, interval);
 }

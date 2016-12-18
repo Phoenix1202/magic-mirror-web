@@ -3,7 +3,7 @@
  */
 
 
-function setClock() {
+var uClock = function setClock() {
 	var d = new Date();
 	var arr = d.toTimeString().split(" ")[0].split(":");
 	
@@ -21,8 +21,8 @@ function initClockWidget() {
 	style.type = "text/css";
 	style.href = "css/clockWidget.css";
 	
-	document.head.append(style);
-	document.body.append(div);
+	document.getElementsByTagName('head')[0].appendChild(style);
+	document.getElementsByTagName('body')[0].appendChild(div);
 	
-	setInterval(setClock, 1000);
+	setInterval(uClock, 1000);
 }

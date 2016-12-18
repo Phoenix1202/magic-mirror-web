@@ -1,8 +1,7 @@
 #weather-temp {
 	font-size: 2em;
 	text-align: right;
-	float: left;
-	
+	float: left;	
 }
 
 #weather-condition {
@@ -10,13 +9,14 @@
 }
 
 #weather-icon {
-	font-size: 3.5em;
-	float: right;
-	text-align: left;
-}
+    font-size: 2.5em;
+    float: right;
+    text-align: left;
+    line-height: 1.3em;
+    padding-top: 0.3em}
 
 #weather-widget {
-	font-size: 4vw;
+	font-size: 1.5em;
 	width: 10em;
 	width: 45%;
 	float: right;

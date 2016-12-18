@@ -14,8 +14,9 @@ function initMessageWidget(message) {
 	style.type = "text/css";
 	style.href = "css/messageWidget.css";
 	
-	document.head.append(style);
-	document.body.append(div);
+
+	document.getElementsByTagName('head')[0].appendChild(style);
+	document.getElementsByTagName('body')[0].appendChild(div);
 }
 
 function getMessage() {
