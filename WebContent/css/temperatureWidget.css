@@ -1,13 +1,14 @@
 #temperature-widget {
-	font-size: 2em;
+	font-size: 1.2em;
 	width: 10em;
 	width: 45%;
 	float: right;
 }
 
 #temperature-widget div{
+	float: right;
 	width:3em;
-	margin: auto;
+	margin: 0.2em;
 	border-left: solid 0.1em white;
 	border-bottom: solid 0.1em white;
 	border-right: solid 0.1em white;

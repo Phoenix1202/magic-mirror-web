@@ -12,20 +12,25 @@ var youAreHere;
  * Callback function for query
  */
 function updateWeather(data) {
+//	alert(JSON.stringify(data.query.results));
 	var time = null;
 	var code = -1;
 	var sunrise = 0;
 	var sunset = 0;
 	var temp = "--";
 	var text = "Unavailable";
+	var high = "-";
+	var low = "-";
 	weatherData = data;
-	//alert(JSON.stringify(data));
 	var oldText = document.getElementById("weather-condition").innerHTML;
 	if(data.query.results != null) {
 		var location = data.query.results.channel.location;
 		var condition = data.query.results.channel.item.condition;
+		var forecast = data.query.results.channel.item.forecast[0];
 		var time = data.query.results.channel.lastBuildDate;
 		var code = condition.code;
+		var high = forecast.high;
+		var low = forecast.low;
 		time = data.query.results.channel.lastBuildDate;
 		code = condition.code;
 		sunrise = parseInt(data.query.results.channel.astronomy.sunrise.split(":")[0]);
@@ -35,9 +40,9 @@ function updateWeather(data) {
 	}
 	if(data.query.results != null || (data.query.results == null && oldText == "")) {
 		document.getElementById("weather-condition").innerHTML = text;
-		document.getElementById("weather-temp").innerHTML = temp + "°C<br>";
+		document.getElementById("weather-temp").innerHTML = temp + "°<div class='weather-extremes'>" + high + "°<br>" + low + "°</div>";
 		document.body.removeChild(document.getElementById(scriptId));
-		document.getElementById("weather-icon").className = getClassNameFromCode(code, sunrise, 23);
+		document.getElementById("weather-icon").className = getClassNameFromCode(code, sunrise, sunset);
 	}
 
 	if(data.query.results != null) {
