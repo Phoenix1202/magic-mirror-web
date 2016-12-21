@@ -3,7 +3,7 @@
 	$path = "/sys/bus/w1/devices/".$_GET["addr"]."/w1_slave";
 	
 	if(file_exists($path)) {
-		$file = file_get_contents();
+		$file = file_get_contents($path);
 		$temp = explode("t=",$file)[1];
 		$temp_num = floatval($temp)/1000.0;
 		$temp_num = round($temp_num,1);

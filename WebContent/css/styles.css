@@ -1,13 +1,116 @@
+
+@keyframes startup {
+	from {transform: scaleY(0); opacity: 0;}
+	to {transform: scaleY(1);}
+}
+
+@keyframes load-anim {
+	0% {opacity: 1; transform: translateY(0);}
+	25% {opacity: 0; transform: translateY(200%) scale(0.75);}
+	26% {opacity: 0; transform: translateY(0) scale(0);}
+	50%{opacity: 1; transform: scale(1);}]
+}
+
+
 body {
 	color: #ffffff;
 	background-color: #000000;
-	width: 90%;
+	width: 100%;
 	font-size: 2vw;
 	font-family:Helvetica, Arial, sans-serif;
 	margin: 0;
+	transition: transform 1s;
+	overflow: hidden;
+}
+
+.container{
+	position: fixed;
+	top: 100vh;
+	width:90%;
+	height: 90%;
 	padding: 5%;
 }
 
 .widget {
 	height: 4em;
+}
+
+.load-screen {
+	position: fixed;
+	top: 0;
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
+	animation: startup 500ms ease-out;
+}
+
+.load-screen p{
+	font-size: 4em;
+	text-align: center;
+	margin-top: 2.5em;
+	margin-left: 0.7em;
+}
+
+.flower {
+	font-size:2em;
+	width:5em;
+	height: 5em;
+	
+}
+
+.petal {
+	margin-top: 1em;
+	width: 1em;
+	height: 1em;
+	background-color: white;
+	border-radius: 50%;
+	margin:0.2em;
+}
+
+.petal-container{
+	position: fixed;
+	top: 5em;
+	left: 50vw;
+	padding-top: 2.5em;
+}
+
+.petal-container:nth-of-type(2) {
+	transform: rotate(60deg);
+}
+.petal-container:nth-of-type(3) {
+	transform: rotate(120deg);
+}
+.petal-container:nth-of-type(4) {
+	transform: rotate(180deg);
+}
+.petal-container:nth-of-type(5) {
+	transform: rotate(240deg);
+}
+.petal-container:nth-of-type(6) {
+	transform: rotate(300deg);
+}
+
+.petal-container:nth-of-type(1) .petal {
+	animation: load-anim 3s ease 500ms infinite;
+}
+.petal-container:nth-of-type(2) .petal {
+	animation: load-anim 3s ease 1000ms infinite;
+}
+.petal-container:nth-of-type(3) .petal {
+	animation: load-anim 3s ease 1500ms infinite;
+}
+.petal-container:nth-of-type(4) .petal {
+	animation: load-anim 3s ease 2000ms infinite;
+}
+.petal-container:nth-of-type(5) .petal {
+	animation: load-anim 3s ease 2500ms infinite;
+}
+.petal-container:nth-of-type(6) .petal {
+	animation: load-anim 3s ease 3000ms infinite;
+}
+
+.load-screen .version-number {
+	font-size: 0.2em;
+	top: -3em;
+	position: relative;
 }

@@ -16,7 +16,7 @@ function initMessageWidget(message) {
 	
 
 	document.getElementsByTagName('head')[0].appendChild(style);
-	document.getElementsByTagName('body')[0].appendChild(div);
+	document.getElementsByClassName('container')[0].appendChild(div);
 }
 
 function getMessage() {

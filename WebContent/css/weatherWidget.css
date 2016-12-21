@@ -15,7 +15,9 @@
     font-size: 2em;
     float: right;
     text-align: left;
-    padding: 0.1em}
+    padding: 0.1em;
+    
+}
 
 #weather-widget {
 	font-size: 1.5em;
@@ -26,8 +28,8 @@
 
 .weather-extremes {
 	font-size: 0.4em;
-	width: unset !important;
+	width: unset;
 	display: inline-block;
-	margin-left: 0.5em !important;
+	margin-left: 0.2em;
 	clear: left;
 }

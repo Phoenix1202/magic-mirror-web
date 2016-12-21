@@ -2,5 +2,11 @@
 	font-size: 4em;
 	width: 45%;
 	float: left;
-	margin-left: 0.5em;	
+	height: 2.5em;
+}
+
+#clock-date {
+	font-size: 0.25em;
+	display: inline-block;
+	width: 100%;
 }
