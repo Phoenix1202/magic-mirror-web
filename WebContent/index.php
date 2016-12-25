@@ -2,24 +2,47 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Smart Home Weather Central</title>
+<title>H.A.N.A Dashboard</title>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 <link rel="stylesheet" type="text/css" href="./css/styles.css">
 <link rel="stylesheet" type="text/css" href="./css/weather-icons.css">
 <script type="text/javascript" src="./script/weatherWidget.js"></script>
 <script type="text/javascript" src="./script/clockWidget.js"></script>
 <script type="text/javascript" src="./script/messageWidget.js"></script>
 <script type="text/javascript" src="./script/temperatureWidget.js"></script>
+<script type="text/javascript" src="./script/calendarWidget.js"></script>
 </head>
 <body>
+	<div class="load-screen">
+		<div class="flower">
+			<div class="petal-container"><div class="petal"></div></div>
+			<div class="petal-container"><div class="petal"></div></div>
+			<div class="petal-container"><div class="petal"></div></div>
+			<div class="petal-container"><div class="petal"></div></div>
+			<div class="petal-container"><div class="petal"></div></div>
+			<div class="petal-container"><div class="petal"></div></div>
+		</div>
+		<p>H.A.N.A.<span class="version-number">v0.1</span></p>
+	</div>
+	<div class="container"></div>
 	<script>
+<<<<<<< HEAD
 
 		var birthDay = 12;
 		var birthMonth = 1;
 
+=======
+		document.addEventListener("init", function(e) {
+			if(weatherInit && temperatureInit) {
+			document.getElementsByTagName("body")[0].style ="transform: translateY(-100vh)";
+			}
+		}, false);
+>>>>>>> e75778f2449a22360ed2a97e0adf99b6372b6449
 		initClockWidget();
 		initWeatherWidget("545299");
 		initTemperatureWidget("28-000008597ee4", 5000);
 		initMessageWidget("Why, hello there!");
+		initCalendarWidget();
 		setInterval(function() {
 			var today = new Date();
 			var h = today.getHours();
@@ -41,11 +64,11 @@
 				if(isRaining()) {
 					appendMessage(" Storms ahead. Be careful.");
 				}
-			} else if(h > 17 && h < 22) {
+			} else if(h > 17 && h <= 22) {
 				setMessage("Good evening.")
 			} else if(h >= 23) {
 				setMessage("You should consider going to bed.")
-			} else if(h > 0 && h <= 4) {
+			} else if(h >= 0 && h <= 4) {
 				setMessage("GO. TO. SLEEP!")
 			} else {
 				setMessage("You look splendid today!")

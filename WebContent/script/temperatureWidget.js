@@ -5,6 +5,7 @@
 var base_dir = "/sys/bus/w1/devices/";
 var sensor_id = null;
 var inner = null;
+var temperatureInit = false;
 
 var uTemp = function updateTemperature() {
 	var client = new XMLHttpRequest();
@@ -13,6 +14,11 @@ var uTemp = function updateTemperature() {
 	  inner.innerHTML = client.responseText+"°";
 	}
 	client.send();
+	
+	if(!temperatureInit) {
+		temperatureInit = true;
+		document.dispatchEvent(new Event("init"));
+	}
 }
 
 function initTemperatureWidget(sensor_id, interval) {
@@ -30,7 +36,7 @@ function initTemperatureWidget(sensor_id, interval) {
 	style.href = "css/temperatureWidget.css";
 
 	document.getElementsByTagName('head')[0].appendChild(style);
-	document.getElementsByTagName('body')[0].appendChild(div);
+	document.getElementsByClassName('container')[0].appendChild(div);
 
 	setInterval(uTemp, interval);
 }

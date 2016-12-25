@@ -1,19 +1,23 @@
 #weather-temp {
 	font-size: 2em;
 	text-align: right;
-	float: left;	
 }
 
 #weather-condition {
 	text-align: right;
+	font-size: 0.5em;
+	float: right;
+	width: 100%;
+	text-align: right;
 }
 
 #weather-icon {
-    font-size: 2.5em;
+    font-size: 2em;
     float: right;
     text-align: left;
-    line-height: 1.3em;
-    padding-top: 0.3em}
+    padding: 0.1em;
+    
+}
 
 #weather-widget {
 	font-size: 1.5em;
@@ -22,7 +26,10 @@
 	float: right;
 }
 
-#weather-widget div {
-	margin: 0px;
-	width: 48%;
+.weather-extremes {
+	font-size: 0.4em;
+	width: unset;
+	display: inline-block;
+	margin-left: 0.2em;
+	clear: left;
 }
