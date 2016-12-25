@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>H.A.N.A Dashboard</title>
+<title>H.A.N.A. Dashboard</title>
 <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 <link rel="stylesheet" type="text/css" href="./css/styles.css">
 <link rel="stylesheet" type="text/css" href="./css/weather-icons.css">
@@ -45,11 +45,11 @@
 			var today = new Date();
 			var h = today.getHours();
 
-			if(today.getMonth() == 11 && today.getDate() > 23 today.getDate() < 27) {
+			if(today.getMonth() == 11 && today.getDate() > 23 && today.getDate() < 27) {
 				setMessage("Merry Christmas!");
 			} else if(today.getMonth() == 0 && today.getDate() == 1 && today.getHours() > 2) {
 				setMessage("Happy New Year!");
-			} else if(today.getMonth() == birthMonth && today.getDate() = birthDay) {
+			} else if(today.getMonth() == birthMonth && today.getDate() == birthDay) {
 				setMessage("Happy Birthday!");
 			} else if(h > 4 && h < 11) {
 				setMessage("Good morning!");
