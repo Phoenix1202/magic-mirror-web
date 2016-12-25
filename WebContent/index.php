@@ -7,21 +7,32 @@
 <link rel="stylesheet" type="text/css" href="./css/weather-icons.css">
 <script type="text/javascript" src="./script/weatherWidget.js"></script>
 <script type="text/javascript" src="./script/clockWidget.js"></script>
-<script type="text/javascript" src="./script/messageWidget.js"></script>	
+<script type="text/javascript" src="./script/messageWidget.js"></script>
 <script type="text/javascript" src="./script/temperatureWidget.js"></script>
 </head>
 <body>
 	<script>
+
+		var birthDay = 12;
+		var birthMonth = 1;
+
 		initClockWidget();
 		initWeatherWidget("545299");
 		initTemperatureWidget("28-000008597ee4", 5000);
 		initMessageWidget("Why, hello there!");
 		setInterval(function() {
-			var h = new Date().getHours();
-			
-			if(h > 4 && h < 11) {
+			var today = new Date();
+			var h = today.getHours();
+
+			if(today.getMonth() == 11 && today.getDate() > 23 today.getDate() < 27) {
+				setMessage("Merry Christmas!");
+			} else if(today.getMonth() == 0 && today.getDate() == 1 && today.getHours() > 2) {
+				setMessage("Happy New Year!");
+			} else if(today.getMonth() == birthMonth && today.getDate() = birthDay) {
+				setMessage("Happy Birthday!");
+			} else if(h > 4 && h < 11) {
 				setMessage("Good morning!");
-					if(isCold()) {
+				if(isCold()) {
 					appendMessage(" Don't forget your coat today.");
 				}
 				if(isRaining()) {
@@ -36,9 +47,9 @@
 				setMessage("You should consider going to bed.")
 			} else if(h > 0 && h <= 4) {
 				setMessage("GO. TO. SLEEP!")
+			} else {
+				setMessage("You look splendid today!")
 			}
-	
-
 		}, 5000);
 	</script>
 </body>
