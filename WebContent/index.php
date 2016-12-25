@@ -26,18 +26,16 @@
 	</div>
 	<div class="container"></div>
 	<script>
-<<<<<<< HEAD
 
 		var birthDay = 12;
 		var birthMonth = 1;
 
-=======
 		document.addEventListener("init", function(e) {
 			if(weatherInit && temperatureInit) {
 			document.getElementsByTagName("body")[0].style ="transform: translateY(-100vh)";
 			}
 		}, false);
->>>>>>> e75778f2449a22360ed2a97e0adf99b6372b6449
+
 		initClockWidget();
 		initWeatherWidget("545299");
 		initTemperatureWidget("28-000008597ee4", 5000);
