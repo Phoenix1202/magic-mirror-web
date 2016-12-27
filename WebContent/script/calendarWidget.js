@@ -2,10 +2,10 @@
 // Developer Console, https://console.developers.google.com
 var CLIENT_ID = "970074172582-5mrsrhmmfijtm9lgm67o3em35864qj2k.apps.googleusercontent.com";
 var SCOPES = [ "https://www.googleapis.com/auth/calendar.readonly" ];
-
+var calendarInit = false;
 /**
  * Initiate auth flow in response to user clicking authorize button.
- * 
+ *
  * @param {Event}
  *            event Button click event.
  */
@@ -43,7 +43,7 @@ function checkAuth() {
 
 /**
  * Handle response from authorization server.
- * 
+ *
  * @param {Object}
  *            authResult Authorization result.
  */
@@ -64,16 +64,16 @@ function loadCalendarApi() {
 
 function listUpcomingEvents() {
 //	alert(Date.now());
-	
-	var today = new Date();
-	today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-	today = new Date(today.getTime() + 24*60*60*1000);
-	var tomorrow = new Date(today.getTime() + 24*60*60*1000);
-	
+
+	var oneDay = 24*60*60*1000;
+	var now = Date.now();
+	var today = new Date(now - (now % oneDay) + oneDay);
+	var tomorrow = new Date(today.getTime() + oneDay);
+
 	var request = gapi.client.calendar.events.list({
 		'calendarId' : 'primary',
-		'timeMin' : (today).toISOString(),
-		'timeMax' : (new Date(Date.now() + 7*24*60*60*1000)).toISOString(),
+		'timeMin' : (new Date(now)).toISOString(),
+		'timeMax' : (new Date(now + 7*oneDay)).toISOString(),
 		'showDeleted' : false,
 		'singleEvents' : true,
 		'orderBy' : 'startTime'
@@ -81,22 +81,21 @@ function listUpcomingEvents() {
 	request.execute(function(resp) {
 		var events = resp.items;
 		calendarDiv.innerHTML = "";
+
 		if (events.length > 0) {
-			var eventDate = new Date(Date.now() - 24*60*60*1000);
-			eventDate = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+			var eventDate = new Date(today - oneDay * 2);
+
 			for (i = 0; i < events.length; i++) {
 				var event = events[i];
-				
 				var curEventDate = event.start.date;
-				
+
 				if(!curEventDate) {
 					curEventDate = event.start.dateTime;
-					curEventDate = new Date(curEventDate);
-					curEventDate = new Date(curEventDate.getFullYear(), curEventDate.getMonth(), curEventDate.getDate());
+					curEventDate = new Date(new Date(curEventDate).getTime() - (new Date(curEventDate).getTime() % oneDay));
 				} else {
 					curEventDate = new Date(event.start.date);
 				}
-								
+
 				var eventDiv = calendarDiv.appendChild(document.createElement("div"));
 				if(curEventDate > eventDate) {
 					var eventDiv = calendarDiv.appendChild(document.createElement("div"));
@@ -126,8 +125,12 @@ function listUpcomingEvents() {
 		} else {
 			calendarDiv.innerHTML = "No upcoming events this week.";
 		}
-
 	});
-	
-	setTimeout(listUpcomingEvents, 60000)
+
+	if(!calendarInit) {
+		calendarInit = true;
+		document.dispatchEvent(new Event("init"));
+	}
+
+	setTimeout(listUpcomingEvents, 60000);
 }

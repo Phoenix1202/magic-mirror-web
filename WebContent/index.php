@@ -31,7 +31,7 @@
 		var birthMonth = 1;
 
 		document.addEventListener("init", function(e) {
-			if(weatherInit && temperatureInit) {
+			if(weatherInit && temperatureInit && calendarInit) {
 			document.getElementsByTagName("body")[0].style ="transform: translateY(-100vh)";
 			}
 		}, false);
