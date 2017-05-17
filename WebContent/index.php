@@ -11,6 +11,7 @@
 <script type="text/javascript" src="./script/messageWidget.js"></script>	
 <script type="text/javascript" src="./script/temperatureWidget.js"></script>
 <script type="text/javascript" src="./script/calendarWidget.js"></script>
+<script type="text/javascript" src="./script/twitterWidget.js"></script>
 </head>
 <body>
 	<div class="load-screen">
@@ -24,7 +25,8 @@
 		</div>
 		<p>H.A.N.A.<span class="version-number">v0.1</span></p>
 	</div>
-	<div class="container"></div>
+	<div class="container">
+	</div>
 	<script>
 		document.addEventListener("init", function(e) {
 			if(weatherInit && temperatureInit) {
@@ -36,6 +38,7 @@
 		initTemperatureWidget("28-000008597ee4", 5000);
 		initMessageWidget("Why, hello there!");
 		initCalendarWidget();
+		initTwitterWidget();
 		setInterval(function() {
 			var h = new Date().getHours();
 			

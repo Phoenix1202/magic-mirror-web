@@ -1,0 +1,10 @@
+#twitter-widget-0 {
+	width: 520px !important;
+	max-width: 25vw !important;
+	float: right;
+	position: absolute !important;
+	right: 5vw;
+	top: 15em;
+	height: 30vh !important;
+	min-height: 25em !important;
+}
