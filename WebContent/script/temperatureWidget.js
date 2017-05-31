@@ -14,7 +14,7 @@ var uTemp = function updateTemperature() {
 	  inner.innerHTML = client.responseText+"°";
 	}
 	client.send();
-	
+
 	if(!temperatureInit) {
 		temperatureInit = true;
 		document.dispatchEvent(new Event("init"));

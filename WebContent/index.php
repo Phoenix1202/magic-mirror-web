@@ -23,20 +23,24 @@
 			<div class="petal-container"><div class="petal"></div></div>
 			<div class="petal-container"><div class="petal"></div></div>
 		</div>
-		<p>H.A.N.A.<span class="version-number">v0.1</span></p>
+		<p>A.L.I.Ce<span class="version-number">v0.1</span></p>
 	</div>
 	<div class="container">
 	</div>
 	<script>
+
+		var birthDay = 12;
+		var birthMonth = 2;
+
 		document.addEventListener("init", function(e) {
-			if(weatherInit && temperatureInit) {
+			if(weatherInit && temperatureInit && calendarInit) {
 			document.getElementsByTagName("body")[0].style ="transform: translateY(-100vh)";
 			}
 		}, false);
 
 		var twitterWidgetId = "864922557102862337";
-		var twitterQuery = "from%3A%40matthewmercer%20OR%20from%3A%40criticalrole%20OR%20from%3A%40derstandardAt%20OR%20from%3A%40arminwolf%20OR%20from%3A%40roosterTeeth%20OR%20from%3A%40themilesluna%20OR%20from%3A%40kerryshawcross%20OR%20from%3A%40snowden";
-		
+		var twitterQuery = "from%3A%40matthewmercer%20OR%20from%3A%40criticalrole%20OR%20from%3A%40derstandardAt%20OR%20from%3A%40arminwolf%20OR%20from%3A%40roosterTeeth%20OR%20from%3A%40themilesluna%20OR%20from%3A%40kerryshawcross%20OR%20from%3A%40snowden";	
+
 		initClockWidget();
 		initWeatherWidget("545299");
 		initTemperatureWidget("28-000008597ee4", 5000);
@@ -44,11 +48,18 @@
 		initCalendarWidget();
 		initTwitterWidget(twitterWidgetId, twitterQuery);
 		setInterval(function() {
-			var h = new Date().getHours();
-			
-			if(h > 4 && h < 11) {
+			var today = new Date();
+			var h = today.getHours();
+
+			if(today.getMonth() == 11 && today.getDate() > 23 && today.getDate() < 27) {
+				setMessage("Merry Christmas!");
+			} else if(today.getMonth() == 0 && today.getDate() == 1 && today.getHours() > 2) {
+				setMessage("Happy New Year!");
+			} else if(today.getMonth() == birthMonth && today.getDate() == birthDay) {
+				setMessage("Happy Birthday!");
+			} else if(h > 4 && h < 11) {
 				setMessage("Good morning!");
-					if(isCold()) {
+				if(isCold()) {
 					appendMessage(" Don't forget your coat today.");
 				}
 				if(isRaining()) {
@@ -63,9 +74,9 @@
 				setMessage("You should consider going to bed.")
 			} else if(h >= 0 && h <= 4) {
 				setMessage("GO. TO. SLEEP!")
+			} else {
+				setMessage("You look splendid today!")
 			}
-	
-
 		}, 5000);
 	</script>
 </body>

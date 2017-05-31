@@ -24,14 +24,14 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
-var clockDiv; 
+var clockDiv;
 var uClock = function setClock() {
 	var d = new Date();
 	var timeArray = d.toTimeString().split(" ")[0].split(":");
-	
+
 	var dateSpan = document.createElement("span");
 	dateSpan.id = "clock-date";
-	dateSpan.innerHTML = weekday[d.getDay()].substring(0,3) + ", " +   d.getDate() + " " + month[d.getMonth()] + " " + d.getYear();
+	dateSpan.innerHTML = weekday[d.getDay()].substring(0,3) + ", " +   d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
 	clockDiv.innerHTML = "";
 	clockDiv.appendChild(dateSpan)
 	clockDiv.innerHTML += timeArray[0] + ":" + timeArray[1] +"<span style='font-size: 0.5em'>:"+timeArray[2] + "</span>";
@@ -40,14 +40,14 @@ var uClock = function setClock() {
 function initClockWidget() {
 	var div = document.createElement("div");
 	var style = document.createElement("link");
-	
+
 	div.id = "clock-widget";
 	div.className ="widget";
-	
+
 	style.rel = "stylesheet";
 	style.type = "text/css";
 	style.href = "css/clockWidget.css";
-	
+
 	document.getElementsByTagName('head')[0].appendChild(style);
 	document.getElementsByClassName('container')[0].appendChild(div);
 	clockDiv = div;
