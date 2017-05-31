@@ -33,12 +33,16 @@
 			document.getElementsByTagName("body")[0].style ="transform: translateY(-100vh)";
 			}
 		}, false);
+
+		var twitterWidgetId = "864922557102862337";
+		var twitterQuery = "from%3A%40matthewmercer%20OR%20from%3A%40criticalrole%20OR%20from%3A%40derstandardAt%20OR%20from%3A%40arminwolf%20OR%20from%3A%40roosterTeeth%20OR%20from%3A%40themilesluna%20OR%20from%3A%40kerryshawcross%20OR%20from%3A%40snowden";
+		
 		initClockWidget();
 		initWeatherWidget("545299");
 		initTemperatureWidget("28-000008597ee4", 5000);
 		initMessageWidget("Why, hello there!");
 		initCalendarWidget();
-		initTwitterWidget();
+		initTwitterWidget(twitterWidgetId, twitterQuery);
 		setInterval(function() {
 			var h = new Date().getHours();
 			

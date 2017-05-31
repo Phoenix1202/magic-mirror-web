@@ -1,12 +1,12 @@
-function initTwitterWidget() {
+function initTwitterWidget(widgetId, query) {
 	var a = document.createElement("a");
 	var style = document.createElement("link");
 	a.setAttribute("class","twitter-timeline");
 	a.setAttribute("data-dnt","true");
 	a.setAttribute("data-chrome","nofooter transparent noscrollbar");
-	a.href="https://twitter.com/search?q=from%3A%40matthewmercer%20OR%20from%3A%40criticalrole%20OR%20from%3A%40derstandardAt%20OR%20from%3A%40arminwolf%20OR%20from%3A%40roosterTeeth%20OR%20from%3A%40themilesluna%20OR%20from%3A%40kerryshawcross%20OR%20from%3A%40snowden";
-	a.setAttribute("data-widget-id","864922557102862337");
-	a.innerHTML="Tweets about from:@matthewmercer OR from:@criticalrole OR from:@derstandardAt OR from:@arminwolf OR from:@roosterTeeth OR from:@themilesluna OR from:@kerryshawcross OR from:@snowden";
+	a.href="https://twitter.com/search?q="+query;
+	a.setAttribute("data-widget-id", widgetId);
+//	a.innerHTML="Tweets about from:@matthewmercer OR from:@criticalrole OR from:@derstandardAt OR from:@arminwolf OR from:@roosterTeeth OR from:@themilesluna OR from:@kerryshawcross OR from:@snowden";
 		
 	style.rel = "stylesheet";
 	style.type = "text/css";
